@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/baseFragment">
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.withingstest.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/baseFragment"
+        android:name="com.example.withingstest.SearchFragment"
+        android:label="fragment_base"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_baseFragment_to_blankFragment2"
+            app:destination="@id/blankFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.example.withingstest.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" >
+        <argument
+            android:name="search"
+            app:argType="string" />
+    </fragment>
+</navigation>
