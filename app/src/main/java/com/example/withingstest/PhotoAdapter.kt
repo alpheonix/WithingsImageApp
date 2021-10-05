@@ -44,10 +44,7 @@ class PhotoAdapter : RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder>() {
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(thumbnailImv)
 
-            itemView.setOnClickListener { itemView.setBackgroundColor(Color.GREEN)
-                slectedItems.add(photo)
-
-            }
+            itemView.setOnClickListener {listener?.invoke(photo)}
 
 
 

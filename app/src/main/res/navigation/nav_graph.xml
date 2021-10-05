@@ -27,5 +27,15 @@
         <argument
             android:name="search"
             app:argType="string" />
+        <action
+            android:id="@+id/action_blankFragment_to_detailFragment2"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.withingstest.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument android:name="img_url" />
     </fragment>
 </navigation>

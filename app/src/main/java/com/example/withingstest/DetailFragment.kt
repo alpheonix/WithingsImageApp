@@ -1,19 +1,17 @@
 package com.example.withingstest
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
-
-import android.widget.Toast
+import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
-import com.example.withingstest.data.api.APIProvider
-import com.example.withingstest.data.api.Listener
-import com.example.withingstest.data.model.Photo
-
+import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,14 +20,12 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [SearchFragment.newInstance] factory method to
+ * Use the [DetailFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SearchFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-private lateinit var btn: Button
-private lateinit var edt: EditText
-
+class DetailFragment : Fragment() {
+    private lateinit var img: ImageView
+    private val args by navArgs<DetailFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,22 +33,18 @@ private lateinit var edt: EditText
     ): View? {
         // Inflate the layout for this fragment
 
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        return inflater.inflate(R.layout.fragment_detail, container, false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        btn = view.findViewById(R.id.ButtonSearch)
-        edt = view.findViewById(R.id.EditTextSearch)
-        btn.setOnClickListener {
+        img = view.findViewById(R.id.imageViewDetail)
+        Glide.with(this).load(args.imgUrl).into(img)
+        img.animate().apply {
+            duration = 1000
+            rotationYBy(360f)
+        }.start()
 
 
-            findNavController().navigate(
-                SearchFragmentDirections.actionBaseFragmentToBlankFragment2(
-                    edt.text.toString()
-                )
-            )
-        }
     }
-
 
 }

@@ -34,7 +34,6 @@ class ListFragment : Fragment() {
     private lateinit var photosRecyclerView: RecyclerView
     private val photoAdapter: PhotoAdapter by lazy { PhotoAdapter() }
     private val args by navArgs<ListFragmentArgs>()
-    private lateinit var btn: Button
 
 
     override fun onCreateView(
@@ -49,8 +48,6 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         photosRecyclerView = view.findViewById(R.id.photos_rcv)
         initRecyclerView()
-        btn = view.findViewById(R.id.ButtonSearch)
-
         getPhotos(args.search)
     }
 
@@ -61,6 +58,7 @@ class ListFragment : Fragment() {
             DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         )
 
+        photoAdapter.listener = this::navigateToDetail
 
 
     }
@@ -68,7 +66,6 @@ class ListFragment : Fragment() {
     private fun getPhotos(search:String) {
        APIProvider.getImages(search,object : Listener<List<Photo>> {
            override fun onSuccess(data: List<Photo>) {
-               Toast.makeText(context,"success",Toast.LENGTH_SHORT).show()
                photoAdapter.data = data as ArrayList<Photo>
 
            }
@@ -78,4 +75,12 @@ class ListFragment : Fragment() {
            }
        })
    }
+    private fun navigateToDetail(photo: Photo) {
+        findNavController().navigate(
+            ListFragmentDirections.actionBlankFragmentToDetailFragment2(
+                photo.previewURL
+
+            )
+        )
+    }
 }
